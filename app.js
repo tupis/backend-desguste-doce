@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 require('./config/database');
+const cors = require("cors");
 
 const app = express();
 const port = process.env.BASE_URL;
@@ -9,12 +10,15 @@ const Category = require("./src/models/category");
 const Product = require('./src/models/product');
 
 const categoryRouter = require('./src/routes/category');
+const productsRouter = require('./src/routes/product');
 const productRouter = require('./src/routes/product');
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/category', categoryRouter);
-app.use('/products', productRouter);
+app.use('/products', productsRouter.products);
+app.use('/product', productRouter.product)
 
 app.get("/", (req, res) => {
     try {
