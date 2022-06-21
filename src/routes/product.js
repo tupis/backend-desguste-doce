@@ -5,8 +5,6 @@ const Category = require("../models/category");
 const productsRouter = express();
 const productRouter = express();
 
-
-
 productsRouter.get("/", async (req, res) => {
     let product = await Product.find({})
 
