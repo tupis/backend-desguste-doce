@@ -2,19 +2,12 @@ const express = require("express");
 const Product = require("../models/product");
 const Category = require("../models/category");
 
-const ola = () =>{
-    console.log()
-}
-
-function Teste(teste=ola()) {
-    console.log()
-    teste()
-}
-
-
+const productsRouter = express();
 const productRouter = express();
 
-productRouter.get("/", async (req, res) => {
+
+
+productsRouter.get("/", async (req, res) => {
     let product = await Product.find({})
 
     try {
@@ -24,7 +17,18 @@ productRouter.get("/", async (req, res) => {
     }
 })
 
-productRouter.post('/:id/post', async (req, res) =>{
+productRouter.get('/:id', async (req, res) => {
+    let product = await Product.findById(req.params.id)
+    
+    try {
+        res.status(200).json(product)
+        
+    } catch (error) {
+        res.status(422)
+    }
+})
+
+productsRouter.post('/:id/post', async (req, res) =>{
 
     let { name, price, description, images } = req.body
 
@@ -48,4 +52,7 @@ productRouter.post('/:id/post', async (req, res) =>{
     }
 })
 
-module.exports = productRouter;
+module.exports = {
+    products: productsRouter,
+    product: productRouter
+}
