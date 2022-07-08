@@ -6,7 +6,10 @@ const category = Schema(
     {
         name: {type: String, required: true},
         options: [
-            {type: String, required: true}
+            {
+                type: String, 
+                required: true
+            }
         ],
         products: [
             { 
