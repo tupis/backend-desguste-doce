@@ -4,7 +4,7 @@ require('./config/database');
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 const Category = require("./src/models/category");
 const Product = require('./src/models/product');
