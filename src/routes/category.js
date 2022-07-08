@@ -13,9 +13,10 @@ categoryRouter.get('/', async (req, res) => {
 })
 
 categoryRouter.post('/post', async (req, res) => {
-    let names = req.body.name
+    let {name, options} = req.body
     let newCategory = new Category({
-        name: names
+        name,
+        options
     })
     try {
         await newCategory.save();
